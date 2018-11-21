@@ -1,0 +1,128 @@
+$colors:(
+    primary: rgb(15, 26, 190),
+    accent: rgb(185, 197, 143)
+);
+$padding: 15px;
+
+@function color($color-name){
+    @return map-get($colors, $color-name );
+}
+
+$desktop: 840px;
+
+@mixin desktop {
+    @media (min-width: #{$desktop}) {
+        @content;
+    }
+}
+
+// learn sass go = https://youtu.be/roywYSEPSvc
+
+// clip path go here = https://bennettfeely.com/clippy/
+
+body{
+    height: 100%;
+    margin: 0;
+    #bg{
+        // clip-path: polygon(100% 0, 100% 76%, 59% 100%, 0 98%, 0 0);
+        clip-path: polygon(100% 0, 100% 78%, 56% 100%, 0 100%, 0 0);
+
+        background-color: map-get($colors,primary );
+        background-color: color(primary);
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        z-index: -1;
+        @include desktop {
+            clip-path: polygon(0 0, 76% 0, 55% 100%, 0 100%);
+        }
+    }
+    header a {
+        text-decoration: none;
+        color: white;
+        padding: $padding;
+        display: block;
+        text-transform: uppercase;
+    }
+}
+
+main {
+    section#card{
+        background: #ffffff;
+        margin: .7rem auto;
+        border-radius: 15px;
+        box-shadow: 0px 10px 30px #00000033;
+        width: 80%;
+        @include desktop{
+            position: absolute;
+            // display: flex;
+            width: 40%;
+            top:40%;
+            left:50%;
+            transform: translateX(-50%);
+            transform: translateY(-40%);
+        }
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 5px;
+            li {
+                margin-bottom: 10px;
+                margin-top: 10px;
+                position: relative;
+                span {
+                    position: absolute;
+                    left: 15px;
+                    width: 1.2rem;
+                    height: 1.2rem;
+                    background-color: royalblue;
+                    border-radius: 50%;
+                    @include desktop{
+                        background-color: transparent;
+                        border: 1px solid blue;
+                    }
+                }
+                strong{
+                    display: inline-block;
+                    margin-left: max(2.8rem);
+                }
+            }
+        }
+    }
+    section#primary{
+        color:white;
+        padding: 10px;
+        text-align: center;
+        position: relative;
+        @include desktop{
+            left: 50px;
+            text-align: left;
+        }
+        h1{
+            font-size: 2rem;
+            text-transform: uppercase;
+            // margin-top: 12px;
+            
+        }
+        p{
+            font-size: 1rem;
+        }
+        a{
+            text-decoration: none;
+            background-color: map-get($colors, accent );
+            text-transform: uppercase;
+            font-weight: bold;
+            color: rgb(0, 0, 0);
+            border-radius: 15px;
+            display: block;
+            margin: 20px auto 0 auto;
+            text-align: center;
+            padding: 15px;
+            @include desktop{
+                width: 30%;
+                margin-top: 10%;
+                margin-left: 20px;
+            }
+        }
+    }
+}
